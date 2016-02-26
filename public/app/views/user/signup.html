@@ -1,0 +1,46 @@
+<section class="row" ng-controller="HomeCtrl as vm">
+  <div class="large-9 large-centered columns">
+    <h4>Signup</h4>
+    <form ng-submit="vm.signup()">
+      <div class="row">
+        <!-- Username -->
+        <div class="large-6 columns">
+          <label>Username <input type="text" ng-model="vm.registrationData.username" /></label>
+        </div>
+        <!-- Password -->
+        <div class="large-6 columns">
+          <label>Password <input type="password" ng-model="vm.registrationData.password" /></label>
+        </div>
+      </div>
+      <!-- Name -->
+      <div class="row">
+        <div class="large-6 columns">
+          <label>First name <input type="text" ng-model="vm.registrationData.firstName" /></label>
+        </div>
+        <div class="large-6 columns">
+          <label>Last name <input type="text" ng-model="vm.registrationData.lastName" /></label>
+        </div>
+      </div>
+      <!-- email -->
+      <div class="row">
+        <div class="large-6 columns">
+          <label>Email <input type="email" ng-model="vm.registrationData.email" /></label>
+        </div>
+        <!-- gender -->
+        <div class="large-6 columns">
+          <label>Gender</label>
+          <input type="radio" name="gender" value="male" id="male" ng-model="vm.registrationData.gender"><label for="male">Male</label>
+          <input type="radio" name="gender" value="female" id="female" ng-model="vm.registrationData.gender"><label for="female">Female</label>
+          <input type="radio" name="gender" value="others" id="others" ng-model="vm.registrationData.gender"><label for="others">Others</label>
+        </div>
+      </div>
+      <!-- Submit button -->
+      <div class="row">
+        <div class="large-5 large-centered columns">
+          <button  class="button small alert">Cancel</button>
+          <input type="submit" value="Signup" class="button small success">
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

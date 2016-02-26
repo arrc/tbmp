@@ -1,0 +1,15 @@
+<section class="row" ng-controller="HomeCtrl as vm">
+  <div class="large-4 large-centered columns">
+    <h4>Login</h4>
+    <form ng-submit="vm.login()">
+      <div>
+        <input type="text" placeholder="Username" data-ng-model="vm.credentials.username">
+      </div>
+      <div>
+        <input type="password" placeholder="Password" data-ng-model="vm.credentials.password">
+      </div>
+      <button type="submit" class="button small secondary expand">Login</button>
+    </form>
+    <hr> <a ui-sref="signup" class="button small success expand">Signup</a>
+  </div>
+</section>

@@ -19,5 +19,17 @@
     "public/lib",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.5.0",
+    "angular": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "foundation": "~5.5.3",
+    "angular-cache": "~4.4.3",
+    "angular-PubSub": "angular.pubsub#*",
+    "angular-jwt": "~0.0.9",
+    "ng-notify": "~0.7.1",
+    "ng-dialog": "~0.5.6",
+    "ng-lodash": "~0.4.0"
+  }
 }

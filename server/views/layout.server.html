@@ -1,0 +1,41 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	  <meta name="fragment" content="!" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <base href="/" />
+    <title>The Bookmark Project | tbmp</title>
+    <link rel="stylesheet" href="lib/foundation/css/normalize.css">
+    <link rel="stylesheet" href="style/css/app.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="lib/ng-notify/dist/ng-notify.min.css">
+    <link rel="stylesheet" href="lib/ng-dialog/css/ngDialog.min.css">
+    <link rel="stylesheet" href="lib/ng-dialog/css/ngDialog-theme-default.min.css">
+    <link rel="stylesheet" href="style/css/style.css">
+  </head>
+
+<body class="ng-cloak" ng-app="tbmp">
+  <header data-ng-include="'app/views/main/navigation.html'"></header>
+	{% block content %}{% endblock %}
+  <header data-ng-include="'app/views/main/footer.html'"></header>
+<!--Application JavaScript Files-->
+	<script src="lib/jquery/dist/jquery.js"></script>
+	<script src="lib/foundation/js/foundation.js"></script>
+  <script src="lib/angular/angular.min.js" charset="utf-8"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="lib/angular-cache/dist/angular-cache.js" charset="utf-8"></script>
+  <script src="lib/angular-PubSub/src/angular-pubsub.js" charset="utf-8"></script>
+  <script src="lib/angular-jwt/dist/angular-jwt.js" charset="utf-8"></script>
+  <script src="lib/ng-notify/dist/ng-notify.min.js" charset="utf-8"></script>
+  <script src="lib/ng-dialog/js/ngDialog.min.js" charset="utf-8"></script>
+  <script src="lib/ng-lodash/build/ng-lodash.min.js" charset="utf-8"></script>
+  {% for script in clientScripts %}
+	<script src="{{ script }}"></script>
+	{% endfor %}
+</body>
+
+</html>
