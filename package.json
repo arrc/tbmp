@@ -1,0 +1,22 @@
+{
+  "name": "tbmp",
+  "version": "1.0.0",
+  "description": "the bookmark project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arrc/tbmp.git"
+  },
+  "keywords": [
+    "bookmarks"
+  ],
+  "author": "arrC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arrc/tbmp/issues"
+  },
+  "homepage": "https://github.com/arrc/tbmp#readme"
+}

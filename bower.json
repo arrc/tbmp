@@ -1,0 +1,23 @@
+{
+  "name": "tbmp",
+  "description": "the bookmark project",
+  "main": "server.js",
+  "authors": [
+    "arrC"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "bookmarks"
+  ],
+  "homepage": "https://github.com/arrc/tbmp",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ]
+}
