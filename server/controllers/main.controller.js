@@ -15,6 +15,8 @@ exports.list = function(req, res){
 
 exports.getUrl = function(req, res){
 	var b = req.body;
-	console.log(b);
-	res.status(200).send({'data':b, message: 'successful'});
+	setTimeout(function(){
+		console.log(b);
+		res.status(200).send({'data':b, message: 'successful'});
+	},8000);
 };

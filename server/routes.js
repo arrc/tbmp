@@ -3,15 +3,20 @@
 module.exports = function(app){
 	var main = require('./controllers/main.controller.js');
 	var user = require('./controllers/user.controller.js');
+	var url = require('./controllers/url.controller.js');
 
 	// 'MAIN' ----------------------------
 	app.route('/').get(main.index);
-	app.route('/list').get(main.list);
-	app.route('/save').post(main.getUrl);
+	app.route('/t/list').get(main.list);
+	app.route('/t/save').post(main.getUrl);
 
 	// 'USER'
 	app.route('/login').post(user.login);
 	app.route('/signup').post(user.signup);
 	app.route('/api/profile').get(user.profile);
+
+	// 'URL'
+	app.route('/url').get(url.retriveUrls);
+	app.route('/url').post(url.saveUrl);
 
 };
