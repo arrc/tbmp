@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/arrc/tbmp#readme",
   "dependencies": {
+    "async": "^1.5.2",
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.3.3",
     "body-parser": "^1.14.2",
     "chance": "^0.8.0",
     "consolidate": "^0.13.1",
