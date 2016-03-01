@@ -13,6 +13,7 @@ let UrlSchema =  mongoose.Schema({
   },
   baseUrl: String,
   title: String,
+  topic: String,
   favIconUrl: String,
   note: String,
   tags: [String],
