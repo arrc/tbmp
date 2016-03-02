@@ -10,6 +10,8 @@ module.exports = function(app){
 	app.route('/t/list').get(main.list);
 	app.route('/t/save').post(main.getUrl);
 	app.route('/t/profile').get(main.profile);
+	app.route('/t/topics').get(main.topics);
+	app.route('/t/urls').get(main.urls);
 
 	// 'USER'
 	app.route('/login').post(user.login);

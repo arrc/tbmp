@@ -1,6 +1,7 @@
 'use strict';
 
 let clientScripts = require('../config/scripts.js');
+let config = require('../config');
 let User = require('../models/user.model.js');
 let Url = require('../models/url.model.js');
 let Topic = require('../models/topic.model.js');
@@ -39,7 +40,7 @@ exports.saveUrl = function(req, res){
 						topic = topicDoc._id;
 						done();
 					} else {
-						Topic.create({name: b.topic.topic}, function(err, topicDoc){
+						Topic.create({user: config.userId ,name: b.topic.topic}, function(err, topicDoc){
 							if (err || !topicDoc){
 								done({ message: 'Failed to create topic.', error: err});
 							} else {
@@ -52,7 +53,7 @@ exports.saveUrl = function(req, res){
 					}
 				});
 			} else { // 1b if not new then simply set the passed value
-				topic = (!b.topic.new) ? b.topic.topicId : undefined;
+				topic = ( b.topic && !b.topic.new) ? b.topic.topicId : undefined;
 				done();
 			}
 		},
@@ -60,7 +61,7 @@ exports.saveUrl = function(req, res){
 		function(done){ // { old: [], new: []}
 			// 2a - if there are new tags then save them in users tags field
 			if(_.isObject(b.tags) && b.tags.new){
-				User.findByIdAndUpdate('56cffdeb1b7b9a38610ad4da').exec(function(err, userDoc){
+				User.findByIdAndUpdate(config.userId).exec(function(err, userDoc){
 					if(err || !userDoc){
 						done({ message: 'Failed to get user.', error: err});
 					} else {
@@ -72,7 +73,6 @@ exports.saveUrl = function(req, res){
 							} else {
 								// set tags
 								tags = b.tags.old.concat(b.tags.new);
-								console.log('Tags: ', tags, b.tags.new);
 								tagsForClient = b.tags.new;
 								done();
 							}
@@ -89,6 +89,7 @@ exports.saveUrl = function(req, res){
 		function(done){
 			// Finally perform save operation.
 			var url = new Url();
+			url.user = config.userId;
 			url.url = b.url;
 			url.title = b.title;
 			url.topic = topic;
@@ -106,7 +107,10 @@ exports.saveUrl = function(req, res){
 					console.log("URL DOC \n", doc);
 					done(null, {
 						'data':doc,
-						new: { tags: tagsForClient, topic: topicForClient },
+						new: {
+							tags: (_.isEmpty(tagsForClient)) ? undefined : tagsForClient,
+							topic: (_.isEmpty(topicForClient)) ? undefined : topicForClient
+						},
 						message: 'Save operation successful'
 					});
 				}
