@@ -20,3 +20,10 @@ exports.getUrl = function(req, res){
 		res.status(200).send({'data':b, message: 'successful'});
 	},8000);
 };
+
+exports.profile = function(req, res){
+	User.findOne({ 'username' : 'admin'}).exec(function(err, doc){
+		if(err) return console.error(err);
+		res.status(200).send({'data': doc, message: 'successful'});
+	});
+};

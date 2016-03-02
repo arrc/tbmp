@@ -28,27 +28,20 @@ exports.saveUrl = function(req, res){
 	var tagsForClient = [];
 	var topicForClient = {};
 	async.waterfall([
-		function(done){
+		// 1 TOPIC
+		function(done){ // {new: true/false, topic: string, topicId: id}
 			// 1a - if topic is new then create and return id.
 			if (_.isObject(b.topic) && b.topic.new) {
 				Topic.findOne({ name: b.topic.topic }).exec(function(err, topicDoc){
 					if(err) {
-						done({ message: 'Failed to create topic.', error: err});
+						done({ message: 'Failed to find topic of this name.', error: err});
 					} else if (topicDoc){
 						topic = topicDoc._id;
-						console.log('Topic \t',topic);
 						done();
 					} else {
 						Topic.create({name: b.topic.topic}, function(err, topicDoc){
 							if (err || !topicDoc){
-								if(err.code === 11000){
-									console.log(err.toJSON);
-									console.log(err.op._id);
-									// topic = topicDoc._id;
-									done({ message: 'Failed to create topic.', error: err});
-								} else {
-									done({ message: 'Failed to create topic.', error: err});
-								}
+								done({ message: 'Failed to create topic.', error: err});
 							} else {
 								// then set topic for saving into the db.
 								topic = topicDoc._id;
@@ -58,55 +51,41 @@ exports.saveUrl = function(req, res){
 						});
 					}
 				});
-				// var newTopic = new Topic();
-				// newTopic.name = b.topic.topic;
-				// newTopic.save(function(err, topicDoc){
-				// 	if (err || !topicDoc){
-				// 		if(err.code === 11000){
-				// 			console.log(err.toJSON);
-				// 			console.log(err.op._id);
-				// 			// topic = topicDoc._id;
-				// 			done({ message: 'Failed to create topic.', error: err});
-				// 		} else {
-				// 			done({ message: 'Failed to create topic.', error: err});
-				// 		}
-				// 	} else {
-				// 		// then set topic for saving into the db.
-				// 		topic = topicDoc._id;
-				// 		topicForClient = { topicId: topicDoc._id , topicName: topicDoc.name };
-				// 		done();
-				// 	}
-				// });
 			} else { // 1b if not new then simply set the passed value
-				topic = b.topic;
+				topic = (!b.topic.new) ? b.topic.topicId : undefined;
 				done();
 			}
 		},
-		function(done){
+		// 2 TAG
+		function(done){ // { old: [], new: []}
 			// 2a - if there are new tags then save them in users tags field
 			if(_.isObject(b.tags) && b.tags.new){
-				User.findById('56cffdeb1b7b9a38610ad4da').exec(function(err, userDoc){
+				User.findByIdAndUpdate('56cffdeb1b7b9a38610ad4da').exec(function(err, userDoc){
 					if(err || !userDoc){
 						done({ message: 'Failed to get user.', error: err});
 					} else {
 						userDoc.tags.addToSet(b.tags.new);
+						console.log('userDoc ', userDoc);
 						userDoc.save(function(err, userDoc){
 							if(err || !userDoc){
 								done({ message: 'Failed to save tags.', error: err});
 							} else {
 								// set tags
 								tags = b.tags.old.concat(b.tags.new);
+								console.log('Tags: ', tags, b.tags.new);
 								tagsForClient = b.tags.new;
 								done();
 							}
 						});
 					}
 				});
-			} else { // 2b - set tags if not new.
+			// 2b - set tags if not new.
+			} else {
 				tags = (b.tags) ? b.tags.old : undefined;
 				done();
 			}
 		},
+		// 3 SAVE
 		function(done){
 			// Finally perform save operation.
 			var url = new Url();
