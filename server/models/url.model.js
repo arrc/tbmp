@@ -15,7 +15,7 @@ let UrlSchema =  mongoose.Schema({
   title: String,
   topic: String,
   favIconUrl: String,
-  note: String,
+  description: String,
   tags: [String],
   flag: String,
   created: Date

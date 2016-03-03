@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
 
-	angular.module('tbmp').factory('AuthInterceptor', function ($rootScope, $q, $window, Auth) {
+	angular.module('tbmp').factory('AuthInterceptor', function ($rootScope, $q, $window, Auth, ngNotify) {
 	  return {
 		request: function (config) {
 			var token = Auth.getToken();

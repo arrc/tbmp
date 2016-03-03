@@ -23,24 +23,24 @@ exports.retriveUrls = function(req, res){
 };
 
 exports.saveUrl = function(req, res){
-	var b = req.body;
-	var topic = "";
-	var tags = [];
-	var tagsForClient = [];
-	var topicForClient = {};
+	let b = req.body;
+	let topic = "";
+	let tags = [];
+	let tagsForClient = [];
+	let topicForClient = {};
 	async.waterfall([
 		// 1 TOPIC
-		function(done){ // {new: true/false, topic: string, topicId: id}
+		function(done){ // topic: {new: true/false, topicName: string, topicId: id}
 			// 1a - if topic is new then create and return id.
 			if (_.isObject(b.topic) && b.topic.new) {
-				Topic.findOne({ name: b.topic.topic }).exec(function(err, topicDoc){
+				Topic.findOne({ name: b.topic.topicName }).exec(function(err, topicDoc){
 					if(err) {
 						done({ message: 'Failed to find topic of this name.', error: err});
 					} else if (topicDoc){
 						topic = topicDoc._id;
 						done();
 					} else {
-						Topic.create({user: config.userId ,name: b.topic.topic}, function(err, topicDoc){
+						Topic.create({user: config.userId ,name: b.topic.topicName}, function(err, topicDoc){
 							if (err || !topicDoc){
 								done({ message: 'Failed to create topic.', error: err});
 							} else {
@@ -88,12 +88,12 @@ exports.saveUrl = function(req, res){
 		// 3 SAVE
 		function(done){
 			// Finally perform save operation.
-			var url = new Url();
+			let url = new Url();
 			url.user = config.userId;
 			url.url = b.url;
 			url.title = b.title;
 			url.topic = topic;
-			url.note = b.note;
+			url.description = b.description;
 			url.flag = b.flag;
 			url.tags = tags;
 			url.favIconUrl = b.favIconUrl;
