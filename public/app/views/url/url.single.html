@@ -1,0 +1,10 @@
+<div class="row"  ng-init="vm.retriveUrl()">
+  <div class="large-12 columns">
+    <h3>Urls list</h3>
+    <p>{{ vm.url.url }}</p>
+    <p>Title: {{ vm.url.title }}</p>
+    <small>Topic: {{ vm.url.topic.name }}</small>
+    <ul><li ng-repeat="tag in vm.url.tags">{{ tag }}</li></ul>
+    <pre>{{ vm.url | json}}</pre>
+  </div>
+</div>

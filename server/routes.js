@@ -19,7 +19,11 @@ module.exports = function(app){
 	app.route('/api/profile').get(user.profile);
 
 	// 'URL'
-	app.route('/url').get(url.retriveUrls);
-	app.route('/url').post(url.saveUrl);
+	app.route('/api/urls').get(url.retriveUrls);
+	app.route('/api/urls').post(url.saveUrl);
+	app.route('/api/urls/:urlId').get(url.retriveUrl);
+	app.route('/api/urls/:urlId').put(url.editUrl);
+	app.route('/api/urls/:urlId').delete(url.deleteUrl);
+	app.param('urlId', url.urlById);
 
 };

@@ -11,7 +11,7 @@
 				_this.isAuth = Auth.isAuthenticated();
         $state.go('profile');
 				ngNotify.set('User logged in successfully!');
-				// $window.location.reload();
+				$window.location.reload();
 			}, function(error){
 				ngNotify.set('user not authenticated ! ' + error, 'error');
 			});

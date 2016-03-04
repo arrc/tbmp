@@ -13,11 +13,13 @@ let UrlSchema =  mongoose.Schema({
   },
   baseUrl: String,
   title: String,
-  topic: String,
+  topic: {type: String, ref: 'Topic'},
   favIconUrl: String,
   description: String,
   tags: [String],
   flag: String,
+  status: {type: String, enum: ['pending']},
+  source: {type: String},
   created: Date
 });
 

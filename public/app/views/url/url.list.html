@@ -1,0 +1,20 @@
+<div class="row" ng-init="vm.retriveUrls()">
+  <div class="large-12 columns">
+    <h3>Urls list</h3>
+
+    <table>
+      <tbody>
+        <tr ng-repeat="url in vm.urls">
+          <td width="300">
+            <p>{{ url.url }}</p>
+            <strong>{{ url.topic.name }}</strong>
+            <ul><li ng-repeat="tag in url.tags track by $index">{{ tag }}</li></ul>
+          </td>
+          <td>{{ url.title }}</td>
+          <td><a ui-sref="urls.view({urlId: url._id})">View</a></td>
+          <td><a ng-click="vm.deleteUrl(url)">Delete</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -10,7 +10,17 @@ let _ = require('lodash');
 let async = require('async');
 let chance = require('chance').Chance();
 
+// urlById
+exports.urlById = function(req, res, next, urlId){
+	Url.findById(urlId).populate('topic').exec(function(err, doc){
+	  if (err) return next(err);
+		if (!doc) return next(new Error('Failed to load url with the id:  ' + urlId));
+		req.url = doc;
+		next();
+	});
+};
 
+// retrive urls
 exports.retriveUrls = function(req, res){
 	Url.find({}).exec(function(err, docs){
 		if (err || !docs){
@@ -22,6 +32,28 @@ exports.retriveUrls = function(req, res){
 	});
 };
 
+// retrive Single url
+exports.retriveUrl = function(req, res){
+  return res.status(200).json({ data: req.url, message: 'success'});
+};
+
+exports.editUrl = function(req, res){
+
+};
+
+// Delete url
+exports.deleteUrl = function(req, res){
+  var url = req.url;
+  url.remove(function(err){
+    if (err) {
+      return res.status(400).json({message: 'Error deleting url.'});
+    } else {
+      return res.status(200).json({ message: 'successfully deleted url'});
+    }
+  });
+};
+
+// save url
 exports.saveUrl = function(req, res){
 	let b = req.body;
 	let topic = "";
@@ -46,7 +78,7 @@ exports.saveUrl = function(req, res){
 							} else {
 								// then set topic for saving into the db.
 								topic = topicDoc._id;
-								topicForClient = { topicId: topicDoc._id , topicName: topicDoc.name };
+								topicForClient = { _id: topicDoc._id , name: topicDoc.name };
 								done();
 							}
 						});
