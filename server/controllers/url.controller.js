@@ -53,6 +53,32 @@ exports.deleteUrl = function(req, res){
   });
 };
 
+// searchUrls
+exports.searchUrls = function(req, res){
+// TOPIC
+	if(req.query.topic && !_.isEmpty(req.query.topic)){
+		console.log(req.query.topic);
+		Url.find({ topic: req.query.topic}).exec(function(err, docs){
+			if (err || !docs){
+				return res.status(400).send({error: err, message:'failed to find urls.'});
+			} else {
+				return res.status(200).send({data: docs, message: 'Success'});
+			}
+		});
+	}
+
+// TAG
+	if(req.query.tag && !_.isEmpty(req.query.tag)){
+		Url.find({ tags: req.query.tag}).exec(function(err, docs){
+			if (err || !docs){
+				return res.status(400).send({error: err, message:'failed to find urls.'});
+			} else {
+				return res.status(200).send({data: docs, message: 'Success'});
+			}
+		});
+	}
+};
+
 // save url
 exports.saveUrl = function(req, res){
 	let b = req.body;

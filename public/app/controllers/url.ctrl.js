@@ -1,9 +1,16 @@
 (function() {
   'use strict';
-	var UrlCtrl = function($http, $state, $stateParams, $window, ngNotify, Url){
+	var UrlCtrl = function($http, $state, $stateParams, $window, ngNotify, Url, Cache){
 		var _this = this;
     _this.urls = [];
     _this.url = {};
+
+// init Cache
+    Cache.getAllCache(); // TODO: refator and return promise.
+    _this.topics = Cache.topicsCache();
+    _this.tags = Cache.tagsCache();
+    _this.urls = Cache.urlsCache();
+    console.log(_this.topics, _this.tags, _this.urls);
 
 // save url
     _this.saveUrl = function(){
@@ -57,6 +64,7 @@
     '$window',
     'ngNotify',
     'Url',
+    'Cache',
     UrlCtrl
 	]);
 })();

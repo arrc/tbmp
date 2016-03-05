@@ -21,6 +21,7 @@ module.exports = function(app){
 	// 'URL'
 	app.route('/api/urls').get(url.retriveUrls);
 	app.route('/api/urls').post(url.saveUrl);
+	app.route('/api/urls/search').get(url.searchUrls);
 	app.route('/api/urls/:urlId').get(url.retriveUrl);
 	app.route('/api/urls/:urlId').put(url.editUrl);
 	app.route('/api/urls/:urlId').delete(url.deleteUrl);

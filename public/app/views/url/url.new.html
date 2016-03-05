@@ -1,11 +1,34 @@
 <div class="row">
-  <div class="large-12 columns">
+  <div class="large-7 large-centered columns">
     <h3>Save url</h3>
 
-    <form ng-submit="vm.saveurl()">
+    <form ng-submit="vm.saveUrl()">
       <input type="text" placeholder="url" ng-model="vm.urlFormData.url">
       <input type="text" placeholder="title" ng-model="vm.urlFormData.title">
       <input type="text" placeholder="description" ng-model="vm.urlFormData.description">
+
+      <div angucomplete-alt
+        placeholder="Select or create new topic"
+        pause="100"
+        selected-object="vm.urlFormData.selectedTopic"
+        local-data="vm.topics"
+        search-fields="name"
+        title-field="name"
+        minlength="1"
+        auto-match="true"
+        focus-first="true"
+        match-class="highlight"
+        override-suggestions="true"
+        input-class="form-control form-control-small"> </div> <br>
+
+      <tags-input min-length="2" ng-model="vm.urlFormData.selectedTags">
+          <auto-complete
+            min-length="1"
+            source="vm.tags"
+            debounce-delay="100"
+            load-on-down-arrow="true"
+            max-results-to-show="50"></auto-complete>
+      </tags-input> <br>
 
       <button class="button small expand">Save</button>
     </form>

@@ -7,6 +7,7 @@ module.exports = [
   'app/services/auth.interceptor.js',
   'app/services/user.service.js',
   'app/services/url.service.js',
+  'app/services/cache.service.js',
   // controllers
   'app/controllers/home.ctrl.js',
   'app/controllers/user.ctrl.js',

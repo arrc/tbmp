@@ -30,7 +30,9 @@
     "angular-jwt": "~0.0.9",
     "ng-notify": "~0.7.1",
     "ng-dialog": "~0.5.6",
-    "ng-lodash": "~0.4.0"
+    "ng-lodash": "~0.4.0",
+    "ng-tags-input": "^3.0.0",
+    "angucomplete-alt": "^2.2.0"
   },
   "resolutions": {
     "angular-cache": "^4.5.0"

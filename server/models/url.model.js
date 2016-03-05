@@ -17,7 +17,7 @@ let UrlSchema =  mongoose.Schema({
   favIconUrl: String,
   description: String,
   tags: [String],
-  flag: String,
+  importance: {type: String, enum: ['very important', 'important', 'not so important' ]},
   status: {type: String, enum: ['pending']},
   source: {type: String},
   created: Date
