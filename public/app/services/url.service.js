@@ -9,7 +9,7 @@
 			var payload = prepareUrlForSaving(urlFormData);
 			console.log(payload);
 			var dfd = $q.defer();
-			$http.post('/api/urls', urlFormData)
+			$http.post('/api/urls', payload)
 				.success(function(res){
 					dfd.resolve(res.data);
 				})

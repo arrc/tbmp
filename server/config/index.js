@@ -2,7 +2,8 @@
 
 var config = {
   'jwtSecretKey' : 'super-sercret-key',
-  'userId': '56cffdeb1b7b9a38610ad4da'
+  '_userId': '56cffdeb1b7b9a38610ad4da', // linux
+  'userId': '56dd275abb883108069dc97f' // mac
 };
 
 module.exports = config;

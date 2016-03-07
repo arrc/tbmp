@@ -81,7 +81,7 @@ exports.searchUrls = function(req, res){
 
 // save url
 exports.saveUrl = function(req, res){
-	let b = req.body;
+	let b = req.body; console.log('request body: \n', req.body);
 	let topic = "";
 	let tags = [];
 	let tagsForClient = [];
@@ -92,12 +92,12 @@ exports.saveUrl = function(req, res){
 			// 1a - if topic is new then create and return id.
 			if (_.isObject(b.topic) && b.topic.new) {
 				Topic.findOne({ name: b.topic.topicName }).exec(function(err, topicDoc){
-					if(err) {
+					if(err) { console.log('Error finding topic doc.');
 						done({ message: 'Failed to find topic of this name.', error: err});
-					} else if (topicDoc){
+					} else if (topicDoc){ console.log('Topic already present.');
 						topic = topicDoc._id;
 						done();
-					} else {
+					} else { console.log('creating topic');
 						Topic.create({user: config.userId ,name: b.topic.topicName}, function(err, topicDoc){
 							if (err || !topicDoc){
 								done({ message: 'Failed to create topic.', error: err});
@@ -111,7 +111,8 @@ exports.saveUrl = function(req, res){
 					}
 				});
 			} else { // 1b if not new then simply set the passed value
-				topic = ( b.topic && !b.topic.new) ? b.topic.topicId : undefined;
+				console.log(( b.topic && b.topic.new === false));
+				topic = ( b.topic && b.topic.new === false) ? b.topic.topicId : undefined;
 				done();
 			}
 		},
