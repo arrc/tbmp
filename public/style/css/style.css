@@ -5,6 +5,10 @@ pre {
   color: grey;
   font-size: .8rem; }
 
+.angucomplete-dropdown {
+  overflow-y: auto;
+  max-height: 300px; }
+
 footer {
   text-align: center; }
   footer a {

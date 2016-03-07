@@ -32,7 +32,7 @@ exports.profile = function(req, res){
 };
 
 exports.topics = function(req, res){
-	Topic.find({user: config.userId}).exec(function(err, docs){
+	Topic.find({user: req.user._id}).exec(function(err, docs){
 		if(err) return console.error(err);
 		var data = [];
 		docs.forEach(function(i){
@@ -43,7 +43,7 @@ exports.topics = function(req, res){
 };
 
 exports.urls = function(req, res){
-	Url.find({user: config.userId}).exec(function(err, docs){
+	Url.find({user: req.user._id}).exec(function(err, docs){
 		if(err) return console.error(err);
 		var data = _.map(docs, 'url');
 		res.status(200).send({'data': data, message: 'successful'});

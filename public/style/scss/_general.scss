@@ -6,3 +6,8 @@ pre {
   color: grey;
   font-size: .8rem;
 }
+
+.angucomplete-dropdown {
+    overflow-y: auto;
+    max-height: 300px; // your preference
+}

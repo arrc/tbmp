@@ -7,6 +7,7 @@
       <input type="text" placeholder="title" ng-model="vm.urlFormData.title">
       <input type="text" placeholder="description" ng-model="vm.urlFormData.description">
 
+      <label>Topic</label>
       <div angucomplete-alt
         placeholder="Select or create new topic"
         pause="100"
@@ -19,16 +20,20 @@
         focus-first="true"
         match-class="highlight"
         override-suggestions="true"
-        input-class="form-control form-control-small"> </div> <br>
+        input-class="form-control form-control-small"> </div>
 
+      <label>Tags</label>
       <tags-input min-length="2" ng-model="vm.urlFormData.selectedTags">
           <auto-complete
             min-length="1"
             source="vm.tags"
-            debounce-delay="100"
+            debounce-delay="20"
+            select-first-match="true"
+            highlight-matched-text="true"
+            load-on-focus="true"
             load-on-down-arrow="true"
             max-results-to-show="50"></auto-complete>
-      </tags-input> <br>
+      </tags-input>
 
       <button class="button small expand">Save</button>
     </form>

@@ -98,7 +98,7 @@ exports.saveUrl = function(req, res){
 						topic = topicDoc._id;
 						done();
 					} else { console.log('creating topic');
-						Topic.create({user: config.userId ,name: b.topic.topicName}, function(err, topicDoc){
+						Topic.create({user: req.user._id ,name: b.topic.topicName}, function(err, topicDoc){
 							if (err || !topicDoc){
 								done({ message: 'Failed to create topic.', error: err});
 							} else {
@@ -120,7 +120,7 @@ exports.saveUrl = function(req, res){
 		function(done){ // { old: [], new: []}
 			// 2a - if there are new tags then save them in users tags field
 			if(_.isObject(b.tags) && b.tags.new){
-				User.findByIdAndUpdate(config.userId).exec(function(err, userDoc){
+				User.findByIdAndUpdate(req.user._id).exec(function(err, userDoc){
 					if(err || !userDoc){
 						done({ message: 'Failed to get user.', error: err});
 					} else {
@@ -148,7 +148,7 @@ exports.saveUrl = function(req, res){
 		function(done){
 			// Finally perform save operation.
 			let url = new Url();
-			url.user = config.userId;
+			url.user = req.user._id;
 			url.url = b.url;
 			url.title = b.title;
 			url.topic = topic;
