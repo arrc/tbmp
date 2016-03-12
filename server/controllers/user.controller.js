@@ -13,7 +13,7 @@ exports.login = function(req, res, next){
     } else {
       req.logIn(user, {session: false}, function(err){
         if (err) {
-          res.status(400).json(err);
+          res.status(400).json({message: "Failed to login.",error: err});
         } else {
           let payload = {
             '_id' : user.id,
@@ -22,7 +22,10 @@ exports.login = function(req, res, next){
           };
           // var token = jwt.sign(payload, config.jwtSecretKey, { expiresIn:  60*60*5 });
           var token = jwt.sign(payload, config.jwtSecretKey);
-          res.status(200).json({token: token, user: user});
+          // res.status(200).json({token: token, user: user});
+          setTimeout(function () {
+            res.status(200).json({token: token, user: user});
+          }, 2000);
         }
       });
     }
